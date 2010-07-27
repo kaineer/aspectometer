@@ -7,19 +7,17 @@
   - ...
 
 ** Тестирование (Приложение aspectometer.testing)
+
+
+*** Area (область знаний: php, postgres etc.)
+  - name
+
 *** Aspect (кем хочет стать)
-  - name
-
-*** Area (php, sql etc.)
-  - aspect_id
-  - name
-
-*** Test (один тест)
   - area_id
   - name
 
 *** Part (группа вопросов внутри теста)
-  - test_id
+  - aspect_id
   - name
   - quantity (сколько вопросов должно быть выбрано)
   - ?weight (насколько важна)
@@ -27,11 +25,11 @@
 *** Question
   - part_id
   - content (html?)
-  - weight
+  - weight (integer)
 
 *** Choice (вариант выбора)
   - content
-  - weight
+  - weight (integer)
 // Примечание - если выбран хотя бы один вариант с нулевым весом,
 //    считаем, что ответ неверный целиком. В противном случае
 //    суммируем веса выбранных вариантов.
