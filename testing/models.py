@@ -48,10 +48,19 @@ class Part( models.Model ):
 class Question( models.Model ):
     part     = models.ForeignKey( Part )
     content  = models.TextField()
+    weight   = models.SmallIntegerField( default = 0 )
+
+    def __unicode__( self ):
+        return self.content
 
 #
 #
 #
 class Choice( models.Model ):
     question = models.ForeignKey( Question )
+    content  = models.CharField( max_length = 200 )
     weight   = models.SmallIntegerField( default = 0 )
+
+    def __unicode__( self ):
+        return self.content
+
