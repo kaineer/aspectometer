@@ -1,15 +1,15 @@
 from django.db import models
-from django.contrib.auth import User
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 # Additional user information
 #
 #
-class Contact( User ):
-    user    = models.ForeignKey( User )
-    jabber  = models.CharField( max_length = 50 )
-  # ... more to add
+#class Contact( User ):
+#    user    = models.ForeignKey( User, related_name = id )
+#    jabber  = models.CharField( max_length = 50 )
+#  # ... more to add
 
 # Knowledge area
 #
@@ -17,12 +17,18 @@ class Contact( User ):
 class Area( models.Model ):
     name = models.CharField( max_length = 50 )
 
+    def __unicode__( self ):
+        return self.name
+
 # Test in area
 #
 #
 class Test( models.Model ):
     area = models.ForeignKey( Area )
     name = models.CharField( max_length = 200 )
+
+    def __unicode__( self ):
+        return self.name
 
 # Test's part (f.e.: language syntax, algorythms)
 #
@@ -33,6 +39,8 @@ class Part( models.Model ):
     quantity = models.PositiveSmallIntegerField()
     weight   = models.SmallIntegerField()
 
+    def __unicode__( self ):
+        return self.name
 
 # Question in test's part
 #
