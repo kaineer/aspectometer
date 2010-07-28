@@ -1,8 +1,14 @@
-# -*- coding: utf-8 -*-
 
 from aspectometer.testing.models import Area, Test, Part, Question, Choice
 from django.contrib import admin
 
+class TestInline( admin.TabularInline ):
+    model = Test
+    extra = 3
+
+class AreaAdmin( admin.ModelAdmin ):
+    fields = [ 'name' ]
+    inlines = [ TestInline ]
 
 class PartInline( admin.TabularInline ):
     model = Part
@@ -28,8 +34,7 @@ class QuestionAdmin( admin.ModelAdmin ):
     fields = [ 'content', 'weight' ]
     inlines = [ ChoiceInline ]
 
-admin.site.register( Area )
+admin.site.register( Area, AreaAdmin )
 admin.site.register( Test, TestAdmin )
 admin.site.register( Part, PartAdmin )
 admin.site.register( Question, QuestionAdmin )
-## admin.site.register( Choice )
