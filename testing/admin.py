@@ -20,7 +20,7 @@ class CustomGroupAdmin( admin.ModelAdmin ):
     filter_horizontal = ('permissions',)
 
     def save_model( self, request, obj, form, change ):
-        if !change:
+        if not change:
             obj.user_set.clear()
             for user in form.cleaned_data['users_set']:
                 obj.user_set.add( user )
