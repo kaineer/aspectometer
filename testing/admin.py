@@ -5,15 +5,6 @@ from django import forms
 from django.contrib import admin
 from django.db import models
 
-# TODO: move it where it belong
-#class CustomGroup( Group ):
-#    # users = models.ManyToManyField( User, related_name = 'users', db_table = u'auth_user_groups' )
-#
-#    class Meta:
-#        app_label = 'auth'
-#        db_table = 'auth_group'
-#        proxy = True
-
 class CustomGroupAdminForm( forms.ModelForm ):
     users_set = forms.ModelMultipleChoiceField( label = 'Users', queryset = User.objects.all(), required = False, help_text = "Group users" )
 
