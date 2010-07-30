@@ -1,6 +1,46 @@
-
+from django.contrib.auth.models import User, Group
 from aspectometer.testing.models import Area, Test, Part, Question, Choice
+from django import forms
+
 from django.contrib import admin
+from django.db import models
+
+# TODO: move it where it belong
+#class CustomGroup( Group ):
+#    # users = models.ManyToManyField( User, related_name = 'users', db_table = u'auth_user_groups' )
+#
+#    class Meta:
+#        app_label = 'auth'
+#        db_table = 'auth_group'
+#        proxy = True
+
+class CustomGroupAdminForm( forms.ModelForm ):
+    users_set = forms.ModelMultipleChoiceField( label = 'Users', queryset = User.objects.all(), required = False, help_text = "Group users" )
+
+    class Meta:
+        model = Group
+
+class CustomGroupAdmin( admin.ModelAdmin ):
+    form = CustomGroupAdminForm
+
+    fields = ( 'name', 'users_set', 'permissions', )
+    search_fields = ('name',)
+    ordering = ('name',)
+    filter_horizontal = ('permissions',)
+
+    def save_model( self, request, obj, form, change ):
+        obj.user_set.clear()
+        for user in form.cleaned_data['users_set']:
+            obj.user_set.add( user )
+        obj.save
+
+    def get_form( self, request, obj = None, **kwargs ):
+        if obj:
+            self.form.base_fields['users_set'].initial = [ user.id for user in obj.user_set.all() ]
+        return super( CustomGroupAdmin, self ).get_form( request, obj )
+
+#
+#
 
 class TestInline( admin.TabularInline ):
     model = Test
@@ -38,3 +78,5 @@ admin.site.register( Area, AreaAdmin )
 admin.site.register( Test, TestAdmin )
 admin.site.register( Part, PartAdmin )
 admin.site.register( Question, QuestionAdmin )
+admin.site.unregister( Group )
+admin.site.register( Group, CustomGroupAdmin )
