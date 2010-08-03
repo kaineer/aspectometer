@@ -26,7 +26,7 @@ TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 SITE_ID = 1
 
@@ -40,7 +40,7 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = '/var/www/aspectometer/htdocs/media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -60,6 +60,11 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+    'django.contrib.auth.context_processors.auth',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -82,6 +87,10 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+     'admin_tools',
+     'admin_tools.theming',
+     'admin_tools.menu',
+     'admin_tools.dashboard',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -91,3 +100,7 @@ INSTALLED_APPS = (
 
     'aspectometer.testing',
 )
+
+ADMIN_TOOLS_MENU = 'aspectometer.menu.CustomMenu'
+ADMIN_TOOLS_INDEX_DASHBOARD = 'aspectometer.dashboard.CustomIndexDashboard'
+ADMIN_TOOLS_MEDIA_URL = '/site_media/'
