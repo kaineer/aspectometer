@@ -16,3 +16,6 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+
+ROOT_PATH = '/home/username/aspectometer' # No slash at end!
