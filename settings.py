@@ -91,14 +91,15 @@ INSTALLED_APPS = (
      'admin_tools.theming',
      'admin_tools.menu',
      'admin_tools.dashboard',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.admin',
 
-    'aspectometer.testing',
+     'django.contrib.auth',
+     'django.contrib.contenttypes',
+     'django.contrib.sessions',
+     'django.contrib.sites',
+     'django.contrib.messages',
+     'django.contrib.admin',
+
+     'aspectometer.testing',
 )
 
 ADMIN_TOOLS_MENU = 'aspectometer.menu.CustomMenu'
