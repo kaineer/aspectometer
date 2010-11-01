@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 # Knowledge area
 #
 #
-class Area( models.Model ):
+class Technology( models.Model ):
     name = models.CharField( max_length = 50 )
 
     def __unicode__( self ):
@@ -23,8 +23,8 @@ class Area( models.Model ):
 # Test in area
 #
 #
-class Test( models.Model ):
-    area = models.ForeignKey( Area )
+class Aspect( models.Model ):
+    technology = models.ForeignKey( Technology )
     name = models.CharField( max_length = 200 )
 
     def __unicode__( self ):
@@ -34,10 +34,16 @@ class Test( models.Model ):
 #
 #
 class Part( models.Model ):
-    test     = models.ForeignKey( Test )
+    aspect     = models.ForeignKey( Aspect )
     name     = models.CharField( max_length = 50 )
     quantity = models.PositiveSmallIntegerField()
     weight   = models.SmallIntegerField()
+
+    def technology( self ):
+        if self.aspect:
+            return self.aspect.technology
+        else:
+            return None
 
     def __unicode__( self ):
         return self.name
@@ -63,4 +69,3 @@ class Choice( models.Model ):
 
     def __unicode__( self ):
         return self.content
-

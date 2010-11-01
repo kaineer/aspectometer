@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group
-from aspectometer.testing.models import Area, Test, Part, Question, Choice
+from aspectometer.testing.models import Technology, Aspect, Part, Question, Choice
 from django import forms
 
 from django.contrib import admin
@@ -36,21 +36,28 @@ class CustomGroupAdmin( admin.ModelAdmin ):
 #
 #
 
-class TestInline( admin.TabularInline ):
-    model = Test
+class AspectInline( admin.TabularInline ):
+    model = Aspect
     extra = 3
 
-class AreaAdmin( admin.ModelAdmin ):
+class TechnologyAdmin( admin.ModelAdmin ):
     fields = [ 'name' ]
-    inlines = [ TestInline ]
+    inlines = [ AspectInline ]
+    
 
 class PartInline( admin.TabularInline ):
     model = Part
     extra = 3
 
-class TestAdmin( admin.ModelAdmin ):
-    fields = [ 'area', 'name' ]
+class AspectAdmin( admin.ModelAdmin ):
+    fields = [ 'technology', 'name' ]
     inlines = [ PartInline ]
+
+    list_display = ( 'technology', 'name', )
+    list_display_links = ( 'name', )
+
+    list_filter = ( 'technology', )
+    search_fields = ( 'name', )
 
 class QuestionInline( admin.TabularInline ):
     model = Question
@@ -58,7 +65,11 @@ class QuestionInline( admin.TabularInline ):
 
 class PartAdmin( admin.ModelAdmin ):
     fields = [ 'name', 'quantity', 'weight' ]
+    list_display = ( 'technology', 'aspect', 'name', )
+    list_display_links = ( 'name', )
     inlines = [ QuestionInline ]
+    list_filter = ( 'aspect', )
+    search_fields = ( 'name', )
 
 class ChoiceInline( admin.TabularInline ):
     model = Choice
@@ -68,8 +79,8 @@ class QuestionAdmin( admin.ModelAdmin ):
     fields = [ 'content', 'weight' ]
     inlines = [ ChoiceInline ]
 
-admin.site.register( Area, AreaAdmin )
-admin.site.register( Test, TestAdmin )
+admin.site.register( Technology, TechnologyAdmin )
+admin.site.register( Aspect, AspectAdmin )
 admin.site.register( Part, PartAdmin )
 admin.site.register( Question, QuestionAdmin )
 admin.site.unregister( Group )
