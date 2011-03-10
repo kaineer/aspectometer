@@ -1,0 +1,99 @@
+[
+  {
+    "pk": 1, 
+    "model": "testing.technology", 
+    "fields": {
+      "name": "PHP"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "testing.aspect", 
+    "fields": {
+      "technology": 1, 
+      "name": "Admin"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "testing.aspect", 
+    "fields": {
+      "technology": 1, 
+      "name": "Coder"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "testing.part", 
+    "fields": {
+      "weight": 1, 
+      "name": "Syntax", 
+      "aspect": 2, 
+      "quantity": 2
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "testing.part", 
+    "fields": {
+      "weight": 1, 
+      "name": "Library", 
+      "aspect": 2, 
+      "quantity": 2
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "testing.question", 
+    "fields": {
+      "content": "First question", 
+      "part": 1, 
+      "weight": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "testing.question", 
+    "fields": {
+      "content": "Second question", 
+      "part": 1, 
+      "weight": 1
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "testing.choice", 
+    "fields": {
+      "content": "Yes", 
+      "question": 1, 
+      "weight": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "testing.choice", 
+    "fields": {
+      "content": "No", 
+      "question": 1, 
+      "weight": 0
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "testing.choice", 
+    "fields": {
+      "content": "Yes", 
+      "question": 2, 
+      "weight": 0
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "testing.choice", 
+    "fields": {
+      "content": "No", 
+      "question": 2, 
+      "weight": 1
+    }
+  }
+]
